@@ -47,6 +47,15 @@ ROOT_URLCONF = 'config.urls'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+ALLOWED_HOSTS = ['141.136.42.126', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://141.136.42.126:8000/', 'https://127.0.0.1']
+
+
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -70,7 +79,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
     ),
 }
 
@@ -81,6 +89,8 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": True,
 }
+
+
 
 
 # Database

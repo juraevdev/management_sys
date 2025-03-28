@@ -1,5 +1,5 @@
 from django.db import transaction
-from rest_framework import generics, status
+from rest_framework import generics, status, permissions
 from rest_framework.response import Response
 from django.utils.timezone import now, timedelta, make_aware, datetime
 from card.models import Card, Saving, Transaction
@@ -40,6 +40,7 @@ class CardGetApiView(generics.GenericAPIView):
 
 class SavingApiView(generics.GenericAPIView):
     serializer_class = SavingSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         user = request.user
