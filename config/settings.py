@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-9mszch5c9&5fwejs4v#-*#z)!@mj5=nva#i$hb=62goc(10jmt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['it-zone.uz']
 
 
 # Application definition
@@ -48,8 +48,6 @@ ROOT_URLCONF = 'config.urls'
 CORS_ALLOW_ALL_ORIGINS = True
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://141.136.42.126',
-    'https://127.0.0.1',
     'https://it-zone.uz'
 ]
 
