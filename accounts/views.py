@@ -146,4 +146,15 @@ class LoginApiView(generics.GenericAPIView):
                 "access": str(refresh.access_token)
             })
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class UserProfileApiView(generics.GenericAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        return Response({
+            "email": user.email,
+            "password": user.password,
+        })
             
