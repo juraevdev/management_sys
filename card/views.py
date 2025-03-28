@@ -43,19 +43,18 @@ class SavingApiView(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         user = request.user
-        card = Card.objects.filter(user=user).first() 
+        card = Card.objects.filter(user=user).first()  
 
         if not card:  
             return Response({"error": "Sizda karta mavjud emas!"}, status=status.HTTP_400_BAD_REQUEST)
 
-        data = request.data.copy()  
-        data["card"] = card.id  
-        serializer = self.get_serializer(data=data)
+        serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            serializer.save(card=card)  
             return Response({'message': 'Saving created successfully!'}, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
     
 
