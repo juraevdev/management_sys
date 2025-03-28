@@ -47,8 +47,11 @@ ROOT_URLCONF = 'config.urls'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-ALLOWED_HOSTS = ['141.136.42.126', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['http://141.136.42.126:8000/', 'http://127.0.0.1']
+CSRF_TRUSTED_ORIGINS = [
+    'https://141.136.42.126',
+    'https://127.0.0.1',
+    'https://it-zone.uz'
+]
 
 
 SECURE_SSL_REDIRECT = True
