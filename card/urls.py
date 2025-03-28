@@ -8,8 +8,8 @@ from card.views import (
 )
 
 urlpatterns = [
-    path('create/', CardApiView.as_view()),
-    path('list/', CardGetApiView.as_view()),
+    path('card/create/', CardApiView.as_view()),
+    path('card/list/', CardGetApiView.as_view()),
     path('saving/', SavingApiView.as_view()),
     path('saving/list/', SavingGetApiView.as_view()),
     # path('transaction/', TransactionApiView.as_view()),
