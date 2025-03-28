@@ -39,4 +39,8 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ("email", "name")
     ordering = ("email",)
 
-admin.site.register(UserConfirmation)
+@admin.register(UserConfirmation)
+class UserConfirmationAdmin(admin.ModelAdmin):
+    list_display = ("user", "code", "expires", "is_used")
+    search_fields = ("user__email", "code")
+    list_filter = ("is_used",)

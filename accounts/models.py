@@ -29,7 +29,7 @@ class CustomUser(AbstractUser):
         send_mail(
             'Email verification code',
             f'Your verification code is: {code}',
-            'no-reply@example.com',
+            'juraevdev@ya.ru',
             [self.email],
             fail_silently=False,
         )

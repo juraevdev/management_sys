@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from card.models import Card, Saving, Transaction
+from card.models import Card, Saving, SavingMonth, Transaction
 
 class CardSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,14 +11,18 @@ class CardSerializer(serializers.ModelSerializer):
         return card
 
 
+class SavingMonthSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SavingMonth
+        fields = ["id", "amount", "year", "month", "is_paid"]
+
 class SavingSerializer(serializers.ModelSerializer):
+    monthly_savings = SavingMonthSerializer(many=True, read_only=True)
+
     class Meta:
         model = Saving
-        fields = "__all__"
+        fields = ["id", "name", "target_amount", "duration_months", "paid", "monthly_savings"]
 
-    def create(self, validated_data):
-        saving = Saving.objects.create(**validated_data)
-        return saving
 
 
 class TransactionSerializer(serializers.ModelSerializer):
@@ -27,8 +31,8 @@ class TransactionSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def create(self, validated_data):
-        transacton = Transaction.objects.create(**validated_data)
-        return transacton
+        transaction = Transaction.objects.create(**validated_data)
+        return transaction
 
 
 class TransactionIncomeSerializer(serializers.ModelSerializer):

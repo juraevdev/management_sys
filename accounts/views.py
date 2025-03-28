@@ -1,4 +1,4 @@
-from rest_framework import generics, status
+from rest_framework import generics, status, permissions
 from rest_framework.response import Response
 from django.utils import timezone
 from accounts.models import CustomUser, UserConfirmation
@@ -47,6 +47,7 @@ class RegisterVerifyApiView(generics.GenericAPIView):
 
 class ResendCodeApiView(generics.GenericAPIView):
     serializer_class = ResendCodeSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -61,6 +62,7 @@ class ResendCodeApiView(generics.GenericAPIView):
 
 class PasswordResetRequestApiView(generics.GenericAPIView):
     serializer_class = PasswordResetRequestSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -76,6 +78,7 @@ class PasswordResetRequestApiView(generics.GenericAPIView):
 
 class PasswordResetVerifyApiView(generics.GenericAPIView):
     serializer_class = PasswordResetVerifySerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -96,6 +99,7 @@ class PasswordResetVerifyApiView(generics.GenericAPIView):
     
 class PasswordResetApiView(generics.GenericAPIView):
     serializer_class = PasswordResetSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
