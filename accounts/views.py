@@ -14,10 +14,10 @@ from accounts.serializers import (
 class RegisterApiView(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            result = serializer.save
+            result = serializer.save()
             return Response(result, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -70,7 +70,7 @@ class PasswordResetRequestApiView(generics.GenericAPIView):
             if user is None:
                 return Response({'message': 'User not found!'}, status=status.HTTP_404_NOT_FOUND)
             code = user.generate_verify_code()
-            return Response({'message': 'Verification code is sent to your email, please check inbox'}, status=status.HTTP_200_OK)
+            return Response({'message': 'Verification code is sent to your email, please check inbox', 'code': code}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

@@ -5,6 +5,7 @@ from accounts.managers import CustomUserManager
 from django.utils import timezone
 
 class CustomUser(AbstractUser):
+    username = None
     name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(unique=True)
     image = models.ImageField(upload_to='users/profile/images/', null=True, blank=True)
@@ -17,7 +18,7 @@ class CustomUser(AbstractUser):
     
 
     def generate_verify_code(self):
-        code = ''.join(str(random.randint(0, 9) for _ in range(5)))
+        code = ''.join(str(random.randint(0, 9)) for _ in range(5))
         UserConfirmation.objects.create(
             user = self,
             code = code,
@@ -35,4 +36,4 @@ class UserConfirmation(models.Model):
     is_used = models.BooleanField(default=False)
 
     def __str__(self):
-        f'{self.user} - {self.code}'
+        return f'{self.user} - {self.code}'
