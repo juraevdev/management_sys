@@ -90,7 +90,7 @@ class TransactionListApiView(generics.GenericAPIView):
     serializer_class = TransactionSerializer
 
     def get(self, request):
-        transaction = Transaction.objects.all(user = request.user)
+        transaction = Transaction.objects.filter(user = request.user)
         serializer = self.get_serializer(transaction, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
