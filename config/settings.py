@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-9mszch5c9&5fwejs4v#-*#z)!@mj5=nva#i$hb=62goc(10jmt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['it-zone.uz']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -48,6 +48,8 @@ ROOT_URLCONF = 'config.urls'
 CORS_ALLOW_ALL_ORIGINS = True
 
 CSRF_TRUSTED_ORIGINS = [
+    'https://141.136.42.126',
+    'https://127.0.0.1',
     'https://it-zone.uz'
 ]
 
@@ -76,22 +78,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated"
+        ],
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=7), 
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=60),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": True,
 }
-
-
 
 
 # Database
@@ -128,7 +130,7 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.yandex.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "juraevdev@ya.ru" 
+EMAIL_HOST_USER = "juraevdev@ya.ru"
 EMAIL_HOST_PASSWORD = "rvpjcvzarxeycyoi"
 
 # Internationalization
